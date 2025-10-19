@@ -28,3 +28,32 @@ Union(2,3): [1-2-3-4][5]
 ```
 
 Now, `connected(1,4)` → true, because they are in the same group, and `connected(1,5)` → false, because 5 is still separate.
+
+        Окей, вот аккуратно в виде **готового блока для README**, который можно прямо скопировать:
+
+---
+
+### Optimizations
+
+**Path Compression (partial)**
+
+```js
+this.ids[i] = this.ids[this.ids[i]];
+```
+
+Performs partial path compression — each node points to its grandparent, reducing tree height and improving future lookup speed.
+
+**Weighted Union by Rank**
+
+```js
+if (rank[rootP] < rank[rootQ]) {
+  ids[rootP] = rootQ;
+} else if (rank[rootP] > rank[rootQ]) {
+  ids[rootQ] = rootP;
+} else {
+  ids[rootQ] = rootP;
+  rank[rootP]++;
+}
+```
+
+Uses the rank (approximate tree depth) to attach the smaller tree under the larger one, keeping the trees balanced and ensuring near-constant time operations.
